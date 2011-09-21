@@ -45,6 +45,7 @@
 
 
 #include "util/u_debug.h"
+#include "util/u_math.h"
 
 #include "lp_bld_const.h"
 #include "lp_bld_intr.h"
