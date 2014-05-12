@@ -115,7 +115,7 @@ create_pass_manager(struct gallivm_state *gallivm)
 {
    assert(!gallivm->passmgr);
 
-   gallivm->passmgr = LLVMCreateFunctionPassManager(gallivm->provider);
+   gallivm->passmgr = LLVMCreateFunctionPassManagerForModule(gallivm->module);
    if (!gallivm->passmgr)
       return FALSE;
 
@@ -174,22 +174,6 @@ create_pass_manager(struct gallivm_state *gallivm)
 static void
 free_gallivm_state(struct gallivm_state *gallivm)
 {
-#if LLVM_VERSION_MAJOR <= 11 /* not sure */
-   /* This leads to crashes w/ some versions of LLVM */
-   LLVMModuleRef mod;
-   char *error;
-
-   if (gallivm->engine && gallivm->provider)
-      LLVMRemoveModuleProvider(gallivm->engine, gallivm->provider,
-                               &mod, &error);
-#endif
-
-#if 0
-   /* XXX this seems to crash with all versions of LLVM */
-   if (gallivm->provider)
-      LLVMDisposeModuleProvider(gallivm->provider);
-#endif
-
    if (gallivm->passmgr)
       LLVMDisposePassManager(gallivm->passmgr);
 
@@ -198,11 +182,12 @@ free_gallivm_state(struct gallivm_state *gallivm)
       LLVMDisposeModule(gallivm->module);
 #endif
 
-#if 0
-   /* Don't free the exec engine, it's a global/singleton */
-   if (gallivm->engine)
+   if (gallivm->engine) {
+      /* This will already destroy any associated module */
       LLVMDisposeExecutionEngine(gallivm->engine);
-#endif
+   } else if (gallivm->module) {
+      LLVMDisposeModule(gallivm->module);
+   }
 
 #if 0
    /* Don't free the TargetData, it's owned by the exec engine */
@@ -218,7 +203,6 @@ free_gallivm_state(struct gallivm_state *gallivm)
    gallivm->engine = NULL;
    gallivm->target = NULL;
    gallivm->module = NULL;
-   gallivm->provider = NULL;
    gallivm->passmgr = NULL;
    gallivm->context = NULL;
    gallivm->builder = NULL;
@@ -234,7 +218,6 @@ init_gallivm_state(struct gallivm_state *gallivm)
 {
    assert(!gallivm->context);
    assert(!gallivm->module);
-   assert(!gallivm->provider);
    int ret;
 
    lp_build_init();
@@ -246,11 +229,6 @@ init_gallivm_state(struct gallivm_state *gallivm)
    gallivm->module = LLVMModuleCreateWithNameInContext("gallivm",
                                                        gallivm->context);
    if (!gallivm->module)
-      goto fail;
-
-   gallivm->provider =
-      LLVMCreateModuleProviderForExistingModule(gallivm->module);
-   if (!gallivm->provider)
       goto fail;
 
    if (!GlobalEngine) {
@@ -286,8 +264,6 @@ init_gallivm_state(struct gallivm_state *gallivm)
    }
 
    gallivm->engine = GlobalEngine;
-
-   LLVMAddModuleProvider(gallivm->engine, gallivm->provider);//new
 
    gallivm->target = LLVMGetExecutionEngineTargetData(gallivm->engine);
    if (!gallivm->target)

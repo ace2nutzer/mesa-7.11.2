@@ -39,7 +39,6 @@ struct gallivm_state
 {
    LLVMModuleRef module;
    LLVMExecutionEngineRef engine;
-   LLVMModuleProviderRef provider;
    LLVMTargetDataRef target;
    LLVMPassManagerRef passmgr;
    LLVMContextRef context;
