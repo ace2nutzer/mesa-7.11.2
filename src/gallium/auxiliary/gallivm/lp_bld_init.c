@@ -116,7 +116,10 @@ create_pass_manager(struct gallivm_state *gallivm)
    if (!gallivm->passmgr)
       return FALSE;
 
+#if HAVE_LLVM < 0x0309
+   // Old versions of LLVM get the DataLayout from the pass manager.
    LLVMAddTargetData(gallivm->target, gallivm->passmgr);
+#endif
 
    if ((gallivm_debug & GALLIVM_DEBUG_NO_OPT) == 0) {
       /* These are the passes currently listed in llvm-c/Transforms/Scalar.h,
