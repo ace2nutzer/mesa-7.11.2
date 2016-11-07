@@ -56,6 +56,7 @@
 #include "lp_bld_sample_aos.h"
 #include "lp_bld_struct.h"
 #include "lp_bld_quad.h"
+#include "lp_bld_intr.h"
 
 
 /**

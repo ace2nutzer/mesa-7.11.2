@@ -80,13 +80,72 @@ lp_declare_intrinsic(LLVMModuleRef module,
    return function;
 }
 
+#if HAVE_LLVM < 0x0400
+static LLVMAttribute lp_attr_to_llvm_attr(enum lp_func_attr attr)
+{
+   switch (attr) {
+   case LP_FUNC_ATTR_ALWAYSINLINE: return LLVMAlwaysInlineAttribute;
+   case LP_FUNC_ATTR_BYVAL: return LLVMByValAttribute;
+   case LP_FUNC_ATTR_INREG: return LLVMInRegAttribute;
+   case LP_FUNC_ATTR_NOALIAS: return LLVMNoAliasAttribute;
+   case LP_FUNC_ATTR_NOUNWIND: return LLVMNoUnwindAttribute;
+   case LP_FUNC_ATTR_READNONE: return LLVMReadNoneAttribute;
+   case LP_FUNC_ATTR_READONLY: return LLVMReadOnlyAttribute;
+   default:
+      _debug_printf("Unhandled function attribute: %x\n", attr);
+      return 0;
+   }
+}
+
+#else
+
+static const char *attr_to_str(enum lp_func_attr attr)
+{
+   switch (attr) {
+   case LP_FUNC_ATTR_ALWAYSINLINE: return "alwaysinline";
+   case LP_FUNC_ATTR_BYVAL: return "byval";
+   case LP_FUNC_ATTR_INREG: return "inreg";
+   case LP_FUNC_ATTR_NOALIAS: return "noalias";
+   case LP_FUNC_ATTR_NOUNWIND: return "nounwind";
+   case LP_FUNC_ATTR_READNONE: return "readnone";
+   case LP_FUNC_ATTR_READONLY: return "readonly";
+   default:
+      _debug_printf("Unhandled function attribute: %x\n", attr);
+      return 0;
+   }
+}
+
+#endif
+
+void
+lp_add_function_attr(LLVMValueRef function,
+                     int attr_idx,
+                     enum lp_func_attr attr)
+{
+
+#if HAVE_LLVM < 0x0400
+   LLVMAttribute llvm_attr = lp_attr_to_llvm_attr(attr);
+   if (attr_idx == -1) {
+      LLVMAddFunctionAttr(function, llvm_attr);
+   } else {
+      LLVMAddAttribute(LLVMGetParam(function, attr_idx - 1), llvm_attr);
+   }
+#else
+   LLVMContextRef context = LLVMGetModuleContext(LLVMGetGlobalParent(function));
+   const char *attr_name = attr_to_str(attr);
+   unsigned kind_id = LLVMGetEnumAttributeKindForName(attr_name,
+                                                      strlen(attr_name));
+   LLVMAttributeRef llvm_attr = LLVMCreateEnumAttribute(context, kind_id, 0);
+   LLVMAddAttributeAtIndex(function, attr_idx, llvm_attr);
+#endif
+}
 
 LLVMValueRef
 lp_build_intrinsic(LLVMBuilderRef builder,
                    const char *name,
                    LLVMTypeRef ret_type,
                    LLVMValueRef *args,
-                   unsigned num_args)
+                   unsigned attr_mask)
 {
    LLVMModuleRef module = LLVMGetGlobalParent(LLVMGetBasicBlockParent(LLVMGetInsertBlock(builder)));
    LLVMValueRef function;
@@ -96,17 +155,23 @@ lp_build_intrinsic(LLVMBuilderRef builder,
       LLVMTypeRef arg_types[LP_MAX_FUNC_ARGS];
       unsigned i;
 
-      assert(num_args <= LP_MAX_FUNC_ARGS);
+      assert(attr_mask <= LP_MAX_FUNC_ARGS);
 
-      for(i = 0; i < num_args; ++i) {
+      for(i = 0; i < attr_mask; ++i) {
          assert(args[i]);
          arg_types[i] = LLVMTypeOf(args[i]);
       }
 
-      function = lp_declare_intrinsic(module, name, ret_type, arg_types, num_args);
+      function = lp_declare_intrinsic(module, name, ret_type, arg_types, attr_mask);
+
+      while (attr_mask) {
+         enum lp_func_attr attr = 1 << u_bit_scan(&attr_mask);
+         lp_add_function_attr(function, -1, attr);
+      }
+
    }
 
-   return LLVMBuildCall(builder, function, args, num_args, "");
+   return LLVMBuildCall(builder, function, args, attr_mask, "");
 }
 
 

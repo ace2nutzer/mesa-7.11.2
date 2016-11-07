@@ -1209,7 +1209,7 @@ draw_llvm_generate(struct draw_llvm *llvm, struct draw_llvm_variant *variant)
    LLVMSetFunctionCallConv(variant->function, LLVMCCallConv);
    for (i = 0; i < Elements(arg_types); ++i)
       if (LLVMGetTypeKind(arg_types[i]) == LLVMPointerTypeKind)
-         LLVMAddAttribute(LLVMGetParam(variant->function, i), LLVMNoAliasAttribute);
+         lp_add_function_attr(variant_func, i + 1, LP_FUNC_ATTR_NOALIAS);
 
    context_ptr  = LLVMGetParam(variant->function, 0);
    io_ptr       = LLVMGetParam(variant->function, 1);
@@ -1412,8 +1412,7 @@ draw_llvm_generate_elts(struct draw_llvm *llvm, struct draw_llvm_variant *varian
    LLVMSetFunctionCallConv(variant->function_elts, LLVMCCallConv);
    for (i = 0; i < Elements(arg_types); ++i)
       if (LLVMGetTypeKind(arg_types[i]) == LLVMPointerTypeKind)
-         LLVMAddAttribute(LLVMGetParam(variant->function_elts, i),
-                          LLVMNoAliasAttribute);
+         lp_add_function_attr(variant_func, i + 1, LP_FUNC_ATTR_NOALIAS);
 
    context_ptr  = LLVMGetParam(variant->function_elts, 0);
    io_ptr       = LLVMGetParam(variant->function_elts, 1);
