@@ -35,6 +35,9 @@
 #include "lp_bld_init.h"
 
 #include <llvm-c/Transforms/Scalar.h>
+#if HAVE_LLVM >= 0x0700
+#include <llvm-c/Transforms/Utils.h>
+#endif
 
 
 #ifdef DEBUG
