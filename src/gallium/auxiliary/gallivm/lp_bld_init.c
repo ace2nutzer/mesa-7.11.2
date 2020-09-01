@@ -133,12 +133,16 @@ create_pass_manager(struct gallivm_state *gallivm)
           * avoid generating bad code.
           * Test with piglit glsl-vs-sqrt-zero test.
           */
+#if LLVM_VERSION_MAJOR <= 11
          LLVMAddConstantPropagationPass(gallivm->passmgr);
+#endif
          LLVMAddPromoteMemoryToRegisterPass(gallivm->passmgr);
       }
       else {
          LLVMAddPromoteMemoryToRegisterPass(gallivm->passmgr);
+#if LLVM_VERSION_MAJOR <= 11
          LLVMAddConstantPropagationPass(gallivm->passmgr);
+#endif
       }
 
       if (util_cpu_caps.has_sse4_1) {
