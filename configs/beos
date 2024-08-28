@@ -50,7 +50,7 @@ ifeq ($(CPU), x86)
 		LDFLAGS += -g
 		DEFINES += -DDEBUG
 	else
-		CFLAGS   += -O3
+		CFLAGS   += -O2
 	endif
 
 	GLUT_CFLAGS = -fexceptions

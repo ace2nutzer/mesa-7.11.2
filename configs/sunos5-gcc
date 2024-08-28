@@ -9,7 +9,7 @@ CC = gcc
 CXX = g++
 
 WARN_FLAGS = -Wall
-OPT_FLAGS  = -O3 -g -fomit-frame-pointer -pipe
+OPT_FLAGS  = -O2 -g -fomit-frame-pointer -pipe
 PIC_FLAGS  = -fPIC
 
 ARCH_FLAGS ?=

@@ -380,7 +380,7 @@ def generate(env):
             print "warning: gcc 4.2.x optimizer is broken -- disabling optimizations"
             ccflags += ['-O0']
         else:
-            ccflags += ['-O3']
+            ccflags += ['-O2']
         ccflags += ['-g3']
         if env['build'] in ('checked', 'profile'):
             # See http://code.google.com/p/jrfonseca/wiki/Gprof2Dot#Which_options_should_I_pass_to_gcc_when_compiling_for_profiling?

@@ -10,8 +10,8 @@ CONFIG_NAME = bluegene-osmesa
 # Compiler and flags
 CC = /opt/ibmcmp/vacpp/bg/8.0/bin/blrts_xlc
 CXX = /opt/ibmcmp/vacpp/bg/8.0/bin/blrts_xlC
-CFLAGS = -O3 -pedantic -D_POSIX_SOURCE -D_POSIX_C_SOURCE=199309L -D_SVID_SOURCE -D_BSD_SOURCE
-CXXFLAGS = -O3 -pedantic -D_POSIX_SOURCE -D_POSIX_C_SOURCE=199309L -D_SVID_SOURCE -D_BSD_SOURCE
+CFLAGS = -O2 -pedantic -D_POSIX_SOURCE -D_POSIX_C_SOURCE=199309L -D_SVID_SOURCE -D_BSD_SOURCE
+CXXFLAGS = -O2 -pedantic -D_POSIX_SOURCE -D_POSIX_C_SOURCE=199309L -D_SVID_SOURCE -D_BSD_SOURCE
 
 MKLIB_OPTIONS = -static
 

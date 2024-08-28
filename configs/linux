@@ -8,7 +8,7 @@ CONFIG_NAME = linux
 CC = gcc
 CXX = g++
 
-OPT_FLAGS  = -O3 -g
+OPT_FLAGS  = -O2 -g
 PIC_FLAGS  = -fPIC
 
 # Add '-DGLX_USE_TLS' to ARCH_FLAGS to enable TLS support.  Add -m32

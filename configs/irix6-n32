@@ -7,8 +7,8 @@ CONFIG_NAME = irix6-n32
 # Compiler and flags
 CC = cc
 CXX = CC
-CFLAGS = -n32 -mips3 -O3 -ansi -woff 1174,1521,1552 -DUSE_XSHM -DPTHREADS
-CXXFLAGS = -n32 -mips3 -O3 -ansi -woff 1174,1552 -DPTHREADS
+CFLAGS = -n32 -mips3 -O2 -ansi -woff 1174,1521,1552 -DUSE_XSHM -DPTHREADS
+CXXFLAGS = -n32 -mips3 -O2 -ansi -woff 1174,1552 -DPTHREADS
 
 GLW_SOURCES = GLwDrawA.c GLwMDrawA.c
 

@@ -49,7 +49,7 @@ INCLUDE_DIRS = \
 	$(SPU_CC) $(SPU_CFLAGS) -c $<
 
 .c.s:
-	$(SPU_CC) $(SPU_CFLAGS) -O3 -S $<
+	$(SPU_CC) $(SPU_CFLAGS) -O2 -S $<
 
 
 # The .a file will be linked into the main/PPU executable

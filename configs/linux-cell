@@ -16,7 +16,7 @@ HOST_CC = gcc
 APP_CC = gcc
 APP_CXX = g++
 
-OPT_FLAGS = -O3
+OPT_FLAGS = -O2
 
 # Cell SDK location
 ## For SDK 2.1: (plus, remove -DSPU_MAIN_PARAM_LONG_LONG below)

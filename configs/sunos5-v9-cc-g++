@@ -14,7 +14,7 @@ CXX = g++
 
 CXX_WARN_FLAGS = -Wall
 CXX_PIC_FLAGS  = -fPIC
-CXX_OPT_FLAGS  = -O3 -m64 -mcpu=ultrasparc -mv8plus -mvis -g -fomit-frame-pointer -pipe
+CXX_OPT_FLAGS  = -O2 -m64 -mcpu=ultrasparc -mv8plus -mvis -g -fomit-frame-pointer -pipe
 CXX_ARCH_FLAGS = -m64
 
 

@@ -6,6 +6,6 @@ CONFIG_NAME = sunos5-64-gcc
 
 # only set vars that differ from sunos5-gcc config
 
-OPT_FLAGS  = -O3 -m64 -mcpu=ultrasparc -mv8plus -mvis -g -fomit-frame-pointer -pipe
+OPT_FLAGS  = -O2 -m64 -mcpu=ultrasparc -mv8plus -mvis -g -fomit-frame-pointer -pipe
 
 ARCH_FLAGS = -m64

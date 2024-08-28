@@ -13,8 +13,8 @@ CONFIG_NAME = catamount-osmesa-pgi
 # Compiler and flags
 CC = cc
 CXX = CC
-CFLAGS = -target=catamount -fastsse -O3 -Mnontemporal -Mprefetch=distance:8,nta   -fPIC -D_POSIX_SOURCE -D_POSIX_C_SOURCE=199309L -D_SVID_SOURCE -D_BSD_SOURCE
-CXXFLAGS = -target=catamount -fastsse -O3 -Mnontemporal -Mprefetch=distance:8,nta -fPIC -D_POSIX_SOURCE -D_POSIX_C_SOURCE=199309L -D_SVID_SOURCE -D_BSD_SOURCE
+CFLAGS = -target=catamount -fastsse -O2 -Mnontemporal -Mprefetch=distance:8,nta   -fPIC -D_POSIX_SOURCE -D_POSIX_C_SOURCE=199309L -D_SVID_SOURCE -D_BSD_SOURCE
+CXXFLAGS = -target=catamount -fastsse -O2 -Mnontemporal -Mprefetch=distance:8,nta -fPIC -D_POSIX_SOURCE -D_POSIX_C_SOURCE=199309L -D_SVID_SOURCE -D_BSD_SOURCE
 
 MKLIB_OPTIONS = -static
 

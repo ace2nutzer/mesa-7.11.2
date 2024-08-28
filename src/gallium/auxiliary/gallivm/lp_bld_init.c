@@ -63,7 +63,7 @@ static boolean gallivm_initialized = FALSE;
  * - 0: None (-O0)
  * - 1: Less (-O1)
  * - 2: Default (-O2, -Os)
- * - 3: Aggressive (-O3)
+ * - 3: Aggressive (-O2)
  *
  * See also CodeGenOpt::Level in llvm/Target/TargetMachine.h
  */
@@ -72,7 +72,7 @@ enum LLVM_CodeGenOpt_Level {
    None,        // -O0
    Less,        // -O1
    Default,     // -O2, -Os
-   Aggressive   // -O3
+   Aggressive   // -O2
 #else
    Default,
    None,

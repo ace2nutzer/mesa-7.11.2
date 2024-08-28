@@ -4,6 +4,6 @@ include $(TOP)/configs/linux
 
 CONFIG_NAME = linux-ppc
 
-OPT_FLAGS = -O3 -mcpu=603 -fsigned-char -funroll-loops
+OPT_FLAGS = -O2 -mcpu=603 -fsigned-char -funroll-loops
 
 # FIXME: Use of PowerPC assembly should be enabled here.
