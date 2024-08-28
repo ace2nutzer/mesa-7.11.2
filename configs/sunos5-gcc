@@ -21,7 +21,7 @@ GLAPI_ASM_SOURCES = $(SPARC_API)
 ASM_FLAGS = -DUSE_SPARC_ASM
 
 CFLAGS   = $(WARN_FLAGS) $(OPT_FLAGS) $(PIC_FLAGS) $(ARCH_FLAGS) $(DEFINES) \
-	$(ASM_FLAGS) -std=c99 -ffast-math -I/usr/openwin/include
+	$(ASM_FLAGS) -std=c99 -I/usr/openwin/include
 
 CXXFLAGS = $(WARN_FLAGS) $(OPT_FLAGS) $(PIC_FLAGS) $(ARCH_FLAGS) $(DEFINES) \
 	-I/usr/openwin/include

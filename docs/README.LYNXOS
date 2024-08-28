@@ -37,7 +37,7 @@ FILES = your_app.x
 
 SPECIAL_INCLUDES = -I/usr/include/GL
 
-SPECIAL_CFLAGS = -g  -ansi -pedantic -funroll-loops -ffast-math -DSHM
+SPECIAL_CFLAGS = -g  -ansi -pedantic -funroll-loops -DSHM
 
 SPECIAL_LIBS = -lglut -lGLU -lGL -lm -L/usr/X11/lib -lXext -lXmu -lXi \
 -lX11 -lbsd -g

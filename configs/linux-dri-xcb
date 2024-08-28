@@ -28,7 +28,7 @@ DEFINES = -D_POSIX_SOURCE -D_POSIX_C_SOURCE=199309L -D_SVID_SOURCE \
 X11_INCLUDES = $(shell pkg-config --cflags-only-I x11) $(shell pkg-config --cflags-only-I xcb) $(shell pkg-config --cflags-only-I x11-xcb) $(shell pkg-config --cflags-only-I xcb-glx)
 
 CFLAGS = -Wall -Wmissing-prototypes $(OPT_FLAGS) $(PIC_FLAGS) $(ARCH_FLAGS) \
-	$(DEFINES) $(ASM_FLAGS) -std=c99 -ffast-math 
+	$(DEFINES) $(ASM_FLAGS) -std=c99 
 
 CXXFLAGS = -Wall $(OPT_FLAGS) $(PIC_FLAGS) $(ARCH_FLAGS) $(DEFINES)
 
