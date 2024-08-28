@@ -26,3 +26,6 @@ cscope*
 config.py
 build
 .dir-locals.el
+*.patch
+patch.sh
+rejects
