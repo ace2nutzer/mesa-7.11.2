@@ -325,8 +325,10 @@ lp_typekind_name(LLVMTypeKind t)
       return "LLVMArrayTypeKind";
    case LLVMPointerTypeKind:
       return "LLVMPointerTypeKind";
+#if LLVM_VERSION_MAJOR <= 11 /* not sure */
    case LLVMOpaqueTypeKind:
       return "LLVMOpaqueTypeKind";
+#endif
    case LLVMVectorTypeKind:
       return "LLVMVectorTypeKind";
    case LLVMMetadataTypeKind:

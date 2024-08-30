@@ -174,7 +174,7 @@ create_pass_manager(struct gallivm_state *gallivm)
 static void
 free_gallivm_state(struct gallivm_state *gallivm)
 {
-#if HAVE_LLVM >= 0x207 /* XXX or 0x208? */
+#if LLVM_VERSION_MAJOR <= 11 /* not sure */
    /* This leads to crashes w/ some versions of LLVM */
    LLVMModuleRef mod;
    char *error;
@@ -235,6 +235,7 @@ init_gallivm_state(struct gallivm_state *gallivm)
    assert(!gallivm->context);
    assert(!gallivm->module);
    assert(!gallivm->provider);
+   int ret;
 
    lp_build_init();
 
@@ -264,8 +265,16 @@ init_gallivm_state(struct gallivm_state *gallivm)
          optlevel = Default;
       }
 
-      if (LLVMCreateJITCompiler(&GlobalEngine, gallivm->provider,
-                                (unsigned) optlevel, &error)) {
+#if HAVE_LLVM >= 0x0301
+      ret = LLVMCreateJITCompilerForModule(&gallivm->engine,
+                                                    gallivm->module,
+                                                    (unsigned) optlevel,
+                                                    &error);
+#else
+      ret = LLVMCreateJITCompiler(&gallivm->engine, gallivm->provider,
+                                  (unsigned) optlevel, &error);
+#endif
+      if (ret) {
          _debug_printf("%s\n", error);
          LLVMDisposeMessage(error);
          goto fail;
@@ -409,7 +418,7 @@ lp_build_init(void)
 
    LLVMInitializeNativeTarget();
 
-   LLVMLinkInJIT();
+   LLVMLinkInMCJIT();
 
    util_cpu_detect();
  
