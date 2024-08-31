@@ -1041,8 +1041,7 @@ if test "$mesa_driver" = dri -o "$mesa_driver" = no; then
             # the new interface.  i810 are missing because there is no
             # x86-64 system where they could *ever* be used.
             if test "x$DRI_DIRS" = "xyes"; then
-                DRI_DIRS="i915 i965 mach64 mga nouveau r128 r200 r300 r600 \
-                    radeon savage tdfx unichrome swrast"
+                DRI_DIRS="sis swrast"
             fi
             ;;
         powerpc*)
