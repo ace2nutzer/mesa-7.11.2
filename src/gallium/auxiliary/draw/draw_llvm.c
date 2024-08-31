@@ -1359,9 +1359,12 @@ draw_llvm_generate(struct draw_llvm *llvm, struct draw_llvm_variant *variant)
    code = LLVMGetPointerToGlobal(gallivm->engine, variant->function);
    variant->jit_func = (draw_jit_vert_func)pointer_to_func(code);
 
+#if 0
    if (gallivm_debug & GALLIVM_DEBUG_ASM) {
       lp_disassemble(code);
    }
+#endif
+
    lp_func_delete_body(variant->function);
 }
 
@@ -1573,9 +1576,12 @@ draw_llvm_generate_elts(struct draw_llvm *llvm, struct draw_llvm_variant *varian
    code = LLVMGetPointerToGlobal(gallivm->engine, variant->function_elts);
    variant->jit_func_elts = (draw_jit_vert_func_elts)pointer_to_func(code);
 
+#if 0
    if (gallivm_debug & GALLIVM_DEBUG_ASM) {
       lp_disassemble(code);
    }
+#endif
+
    lp_func_delete_body(variant->function_elts);
 }
 

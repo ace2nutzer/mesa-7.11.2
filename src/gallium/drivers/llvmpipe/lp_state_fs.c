@@ -814,9 +814,12 @@ generate_fragment(struct llvmpipe_context *lp,
 
       variant->jit_function[partial_mask] = (lp_jit_frag_func)pointer_to_func(f);
 
+#if 0
       if ((gallivm_debug & GALLIVM_DEBUG_ASM) || (LP_DEBUG & DEBUG_FS)) {
          lp_disassemble(f);
       }
+#endif
+
       lp_func_delete_body(function);
    }
 }

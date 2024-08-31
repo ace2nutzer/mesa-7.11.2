@@ -154,9 +154,11 @@ test_format_float(struct gallivm_state *gallivm, unsigned verbose, FILE *fp,
    f = LLVMGetPointerToGlobal(engine, fetch);
    fetch_ptr = (fetch_ptr_t) pointer_to_func(f);
 
+#if 0
    if (verbose >= 2) {
       lp_disassemble(f);
    }
+#endif
 
    for (l = 0; l < util_format_nr_test_cases; ++l) {
       const struct util_format_test_case *test = &util_format_test_cases[l];
@@ -236,9 +238,11 @@ test_format_unorm8(struct gallivm_state *gallivm,
    f = LLVMGetPointerToGlobal(gallivm->engine, fetch);
    fetch_ptr = (fetch_ptr_t) pointer_to_func(f);
 
+#if 0
    if (verbose >= 2) {
       lp_disassemble(f);
    }
+#endif
 
    for (l = 0; l < util_format_nr_test_cases; ++l) {
       const struct util_format_test_case *test = &util_format_test_cases[l];

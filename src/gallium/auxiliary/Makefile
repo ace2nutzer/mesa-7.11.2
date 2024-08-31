@@ -189,7 +189,6 @@ GALLIVM_SOURCES = \
         draw/draw_pt_fetch_shade_pipeline_llvm.c
 
 GALLIVM_CPP_SOURCES = \
-	gallivm/lp_bld_debug.cpp \
 	gallivm/lp_bld_misc.cpp
 
 GENERATED_SOURCES = \

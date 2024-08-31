@@ -499,8 +499,10 @@ test_one(struct gallivm_state *gallivm,
    code = LLVMGetPointerToGlobal(engine, func);
    blend_test_ptr = voidptr_to_blend_test_ptr_t(code);
 
+#if 0
    if(verbose >= 2)
       lp_disassemble(code);
+#endif
 
    success = TRUE;
    for(i = 0; i < n && success; ++i) {

@@ -208,8 +208,10 @@ test_one(struct gallivm_state *gallivm, unsigned verbose,
    code = LLVMGetPointerToGlobal(engine, func);
    conv_test_ptr = (conv_test_ptr_t)pointer_to_func(code);
 
+#if 0
    if(verbose >= 2)
       lp_disassemble(code);
+#endif
 
    success = TRUE;
    for(i = 0; i < n && success; ++i) {

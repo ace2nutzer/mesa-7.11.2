@@ -549,10 +549,12 @@ finalize_function(struct gallivm_state *gallivm,
     */
    f = LLVMGetPointerToGlobal(gallivm->engine, function);
 
+#if 0
    if (gallivm_debug & GALLIVM_DEBUG_ASM)
    {
       lp_disassemble(f);
    }
+#endif
 
    lp_func_delete_body(function);
 
