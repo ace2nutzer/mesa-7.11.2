@@ -27,7 +27,7 @@
 
 #include <llvm-c/Core.h>
 #include <llvm/Target/TargetMachine.h>
-#include <llvm/Target/TargetRegistry.h>
+#include <llvm/Support/TargetRegistry.h>
 #include <llvm/Target/TargetSelect.h>
 #include <llvm/Target/TargetInstrInfo.h>
 #include <llvm/Support/raw_ostream.h>
