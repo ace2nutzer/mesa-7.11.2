@@ -28,8 +28,8 @@
 #include <llvm-c/Core.h>
 #include <llvm/Target/TargetMachine.h>
 #include <llvm/Support/TargetRegistry.h>
-#include <llvm/Target/TargetSelect.h>
-#include <llvm/Target/TargetInstrInfo.h>
+#include <llvm/Support/TargetSelect.h>
+#include <llvm/CodeGen/TargetInstrInfo.h>
 #include <llvm/Support/raw_ostream.h>
 #include <llvm/Support/MemoryObject.h>
 
@@ -40,7 +40,7 @@
 #endif
 
 #if HAVE_LLVM >= 0x0207
-#include <llvm/MC/MCDisassembler.h>
+#include <llvm/MC/MCDisassembler/MCDisassembler.h>
 #include <llvm/MC/MCAsmInfo.h>
 #include <llvm/MC/MCInst.h>
 #include <llvm/MC/MCInstPrinter.h>

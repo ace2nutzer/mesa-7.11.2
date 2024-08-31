@@ -98,8 +98,6 @@ lp_set_target_options(void)
    llvm::NoFramePointerElim = true;
 #endif
 
-   llvm::NoExcessFPPrecision = false;
-
    /* XXX: Investigate this */
 #if 0
    llvm::UnsafeFPMath = true;
