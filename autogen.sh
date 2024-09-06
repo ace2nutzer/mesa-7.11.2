@@ -18,5 +18,5 @@ if test -z "$NOCONFIGURE"; then
     exec "$srcdir"/configure \
 		CFLAGS="$FLAGS_CPU $FLAGS -Werror-implicit-function-declaration" \
 		CXXFLAGS="$FLAGS_CPU $FLAGS" \
-		--prefix=/usr "$@"
+		--prefix=/usr/local "$@"
 fi
